@@ -1,6 +1,9 @@
 # Dynamic-randomized-gossip
 We study average consensus in mobile multi-agent systems via randomized gossip
 
+## Overview
+Explain problem to be studied and corresponding code structure here 
+
 ## How to develop
 - run, comment, and visualize experiments in jupyter notebook `main.ipynb`
 - validate all code locally and incrementally in `test.py`
@@ -13,7 +16,7 @@ We study average consensus in mobile multi-agent systems via randomized gossip
 - Python 3.6
 - Jupyter 1.0
 - Matplotlib
-- PIP (_not mandatory but recommended_)
+- PIP _(not mandatory but recommended)_
 
 ### Installation
 Either install Jupyter and Matplotlib via PIP:
