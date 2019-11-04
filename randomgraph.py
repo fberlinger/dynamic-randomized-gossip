@@ -6,6 +6,7 @@ class RandomGraph():
         self.graph = [[] for n in range(graph_size)] # adjacency list
         self.edges = 0
         self.generate_graph(graph_size, edge_propability)
+        self.agents = [set() for n in range(graph_size)]
 
     def generate_graph(self, n, p):
         for node in range(n):

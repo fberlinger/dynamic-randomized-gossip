@@ -42,7 +42,7 @@ class Heap():
             self.pos[self.heap[N][0]] = N # heap position
             self.min_heapify(smallest)
 
-    def insert(self, obj, value, event):
+    def insert(self, obj, value, pos):
         """Inserts a new vertex/value pair into the heap as a leaf and promotes it upwards until larger than its parent
         
         Args:
@@ -50,7 +50,7 @@ class Heap():
             value (int): Vertex distance
         """
         # add obj/value pair as a leaf, increment heap size
-        self.heap.append([obj, value, event])
+        self.heap.append([obj, value, pos])
         self.size += 1
 
         # promote new pair upwards until larger than parent (swap!)
@@ -62,25 +62,6 @@ class Heap():
             self.pos[self.heap[N][0]] = N # heap position
             N = int(math.floor((N-1)/2))
         self.pos[obj] = N # heap position
-
-    def decrease_key(self, obj, value):
-        """Update the value of a vertex and promote upwards until larger than its parent
-        
-        Args:
-            obj (int): Vertex number
-            value (int): Vertex distance
-        """
-        N = self.pos[obj]
-        self.heap[N][1] = value
-        
-        # promote new pair upwards until larger than parent (swap!)
-        while N != 0 and self.heap[int(math.floor((N-1)/2))][1] > value:
-            parent = self.heap[int(math.floor((N-1)/2))]
-            self.heap[int(math.floor((N-1)/2))] = self.heap[N] # parent to child
-            self.heap[N] = parent # child to parent
-            self.pos[self.heap[N][0]] = N # heap position
-            N = int(math.floor((N-1)/2))
-        self.pos[obj] = N # heap position   
 
     def delete_min(self):
         """Delete the root (minimum element in the heap). Put the last leaf as a new root and min heapify
