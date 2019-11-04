@@ -24,7 +24,7 @@ Either install Jupyter and Matplotlib via PIP:
 git clone git@code.harvard.edu:flb979/Dynamic-randomized-gossip.git && cd Dynamic-randomized-gossip
 pip install -r ./requirements.txt
 ```
-Or manually via https://jupyter.org/install and https://scipy.org/install.html
+Or manually via https://jupyter.org/install and https://matplotlib.org/3.1.1/users/installing.html
 
 ### Run
 Open the jupyter notebook
