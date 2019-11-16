@@ -17,4 +17,4 @@ print('expected edges = {}\n'.format(round(n*(n-1)/2 *p))) # edge expectation
 ## - - - - ##
 
 val = [-4, 0, 3]
-print(max(max(val), abs(min(val))))
+print(random.randint(0, 1))
