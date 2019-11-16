@@ -18,3 +18,5 @@ print('expected edges = {}\n'.format(round(n*(n-1)/2 *p))) # edge expectation
 
 val = [-4, 0, 3]
 print(random.randint(0, 1))
+
+print([0 for ii in range(5)])
