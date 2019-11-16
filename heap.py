@@ -71,9 +71,13 @@ class Heap():
         """
         # safe min, replace with last leaf, decrement heap size, min_heapify
         minn = self.heap[0]
+        self.size -= 1 # heap empty
+        if self.size == -1:
+            self.heap.pop()
+            return minn
+
         self.pos[minn[0]] = self.inf # set min pos to out of heap position
         self.heap[0] = self.heap.pop()
         self.pos[self.heap[0][0]] = 0 # reset leaf heap position
-        self.size -= 1
         self.min_heapify(0)
         return minn

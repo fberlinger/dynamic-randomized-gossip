@@ -42,8 +42,7 @@ def run_simulation(no_agents, graph_size, edge_probability, mu, sigma, clock_rat
         (uuid, event_time, pos) = H.delete_min()
         
         # stop simulation if out of time
-        if event_time > simulation_time or agents_off == off_percentage*no_agents:
-            simulation_time = round(event_time)
+        if event_time > simulation_time:
             break
         
         # remove current agent from node and pick random agent at same node to average values, update standard deviation
@@ -61,7 +60,10 @@ def run_simulation(no_agents, graph_size, edge_probability, mu, sigma, clock_rat
                     off_counter[uuid] += 1
                     no_valid_neighbors -= 1
                     continue
-                elif val[uuid] - val[neighbors[ii]] < sigma * shrink_factor:
+                else:
+                    off_counter[uuid] = 0
+                    off_counter[neighbors[ii]] = 0
+                if val[uuid] - val[neighbors[ii]] < sigma * shrink_factor:
                     conv_counter[uuid] += 1
                     conv_counter[neighbors[ii]] += 1
                 else:
@@ -86,20 +88,24 @@ def run_simulation(no_agents, graph_size, edge_probability, mu, sigma, clock_rat
             new_std = abs((old_var + diff)) ** 0.5
             std_rt_val.append(new_std)
             std_rt_t.append(event_time)
-            
-        ## ADITION ##
-        agents_off_val.append(agents_off)
-        agents_off_t.append(event_time)
-        if off_counter[uuid] == n_off or conv_counter[uuid] == n_conv:
-            status[uuid] = 'off'
-            agents_off += 1
-            continue # never goes back on the heap, never goes back in action
-        ##############
 
         # move current agent to random neighboring node
         next_pos_ind = random.randint(0, len(Gnp.graph[pos])-1)
         next_pos = Gnp.graph[pos][next_pos_ind]
         Gnp.agents[next_pos].add(uuid)
+
+        ## ADDITION ##
+        agents_off_val.append(agents_off)
+        agents_off_t.append(event_time)
+        if off_counter[uuid] >= n_off or conv_counter[uuid] >= n_conv:
+            status[uuid] = 'off'
+            agents_off += 1
+            if agents_off == off_percentage*no_agents:
+                simulation_time = round(event_time)
+                break
+            else:
+                continue # never goes back on the heap, never goes back in action
+        ##############
         
         # update current agent's clock and insert it in heap
         next_clock = event_time + exp_rv(clock_rate)
