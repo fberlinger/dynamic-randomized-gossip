@@ -1,3 +1,5 @@
+"""This library provides the data structure to keep track of agents actions. Agents get inserted into a min heap sorted accoring to when their clocks tick next, and that is decided by a Poisson process.
+"""
 import math
 
 class Heap():
@@ -5,12 +7,16 @@ class Heap():
     
     Attributes:
         heap (list): Verteces ordered by minimum value
+        inf (int): A number larger than the number of elements in the heap
         pos (int): Heap position of a given vertex
         size (int): Heap size (zero-indexed)
     """
 
     def __init__(self, N):
-        """Summary
+        """Initializes a heap for N elements with undefined positions
+        
+        Args:
+            N (int): Number of elements in the heap
         """
         self.heap = [] # list of list containing vertex/value pairs
         self.size = -1
@@ -24,9 +30,6 @@ class Heap():
             N (int): Heap position from which to heapify
         """
         # swap with smallest child until smallest
-        #print(self.heap)
-        #print('\n')
-
         if 2*N+1 <= self.size and self.heap[2*N+1][1] < self.heap[N][1]:
             smallest = 2*N+1
         else:
@@ -46,8 +49,9 @@ class Heap():
         """Inserts a new vertex/value pair into the heap as a leaf and promotes it upwards until larger than its parent
         
         Args:
-            obj (int): Vertex number
-            value (int): Vertex distance
+            obj (int): uuid of agent
+            value (int): next clock tick of agent (relevant for min-heap)
+            pos (int): location on graph of agent
         """
         # add obj/value pair as a leaf, increment heap size
         self.heap.append([obj, value, pos])
@@ -67,7 +71,7 @@ class Heap():
         """Delete the root (minimum element in the heap). Put the last leaf as a new root and min heapify
         
         Returns:
-            TYPE: Description
+            list: Minimum element in heap, i.e., agent with lowest clock value and its corresponding uuid and position on graph
         """
         # safe min, replace with last leaf, decrement heap size, min_heapify
         minn = self.heap[0]
