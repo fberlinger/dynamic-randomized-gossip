@@ -1,4 +1,5 @@
 import math
+from math import factorial as fac
 import random
 from operator import add 
 import matplotlib
@@ -32,10 +33,17 @@ grid = RandomGraph('grid', n, m)
 print(grid.graph)
 ## - - - - ##
 
+def binomial(n, k):
+    try:
+        binom = fac(n) / (fac(k) * fac(n - k))
+    except ValueError:
+        binom = 0
+    return binom
 
-import numpy as np
+n = 100
+A = 10
 
-results = [0.38, 0.29, 0.26, 0.14, -0.03, -0.06, -0.11, -0.16, -0.23, -0.48]
+pr_gossip = 1 - fac(n) / fac(n - A) / n**A
 
-print(np.var(results))
+print(pr_gossip)
 
