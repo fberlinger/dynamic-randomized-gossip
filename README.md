@@ -1,16 +1,6 @@
 # Dynamic-randomized-gossip
 We study average consensus in mobile multi-agent systems via randomized gossip
 
-## Overview
-Explain problem to be studied and corresponding code structure here 
-
-## How to develop
-- run, comment, and visualize experiments in jupyter notebook `main.ipynb`
-- validate all code locally and incrementally in `test.py`
-- throw small helper functions in `helperfcts.py`
-- create one file per class that represents a data structure (e.g. `heap.py` and `randomgraph.py`)
-- write and comment code according to PEP8
-
 ## How to use
 ### Requirements
 - Python 3.6
@@ -31,4 +21,9 @@ Open the jupyter notebook
 ```
 jupyter notebook
 ```
-and within that notebook open `main.ipynb`. Please run each cell individually! Sit back and watch the extravaganza!
+and within that notebook open any file ending on `.ipynb`, e.g.:
+
+- `2019_oliva_fig3bcd.ipynb`, a reproduction of fig. 3 results from Oliva et al. (2019)
+- `basic_scalings.ipynb`, some intuition for how decentralized average consesus performs under different parameters
+
+Please run each cell individually! Sit back and watch the extravaganza!
