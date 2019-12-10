@@ -9,7 +9,7 @@ from lib_heap import Heap
 from lib_randomgraph import RandomGraph
 
 ## validation of random graph Gnp ##
-print('validation of random graph:')
+print('validation of Gnp:')
 n = 5
 p = 0.5
 Gnp = RandomGraph('Gnp', n, p)
@@ -24,6 +24,7 @@ n = 5
 m = 8
 gnm = RandomGraph('Gnm', n, m)
 print(gnm.graph)
+print('\n')
 ## - - - - ##
 
 ## validation of random graph grid #
@@ -31,8 +32,10 @@ print('validation of grid:')
 n = 17
 grid = RandomGraph('grid', n, m)
 print(grid.graph)
+print('\n')
 ## - - - - ##
 
+## gossip probability - birthday paradox ##
 def binomial(n, k):
     try:
         binom = fac(n) / (fac(k) * fac(n - k))
@@ -42,8 +45,7 @@ def binomial(n, k):
 
 n = 100
 A = 10
-
 pr_gossip = 1 - fac(n) / fac(n - A) / n**A
 
-print(pr_gossip)
-
+print('gossip probability is {}'.format(pr_gossip))
+###########################################
