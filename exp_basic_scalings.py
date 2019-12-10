@@ -28,14 +28,14 @@ def run_simulation(no_agents, graph_type, graph_size, edge_probability, mu, sigm
     """
     # initialize data structures
     H = Heap(no_agents)
-    Gnp = RandomGraph(graph_type, graph_size, edge_probability)
+    G = RandomGraph(graph_type, graph_size, edge_probability)
 
     # get agents started
     val = []
     for uuid in range(no_agents):
         clock = exp_rv(clock_rate)
         pos = random.randint(0, graph_size-1)
-        Gnp.agents[pos].add(uuid)
+        G.agents[pos].add(uuid)
         H.insert(uuid, clock, pos)
         val.append(random.gauss(mu, sigma))
     val_0 = val.copy()
@@ -56,9 +56,9 @@ def run_simulation(no_agents, graph_type, graph_size, edge_probability, mu, sigm
             break
         
         # remove current agent from node and pick random agent at same node to average values, update standard deviation
-        Gnp.agents[pos].remove(uuid)
-        if len(Gnp.agents[pos]): # i.e. not alone on node
-            neighbor_id = random.choice(list(Gnp.agents[pos]))
+        G.agents[pos].remove(uuid)
+        if len(G.agents[pos]): # i.e. not alone on node
+            neighbor_id = random.choice(list(G.agents[pos]))
             self_val = val[uuid]
             neighbor_val = val[neighbor_id]
             avg_val = (self_val + neighbor_val) / 2
@@ -75,21 +75,21 @@ def run_simulation(no_agents, graph_type, graph_size, edge_probability, mu, sigm
             std_rt_t.append(event_time)
                 
         # move current agent to random neighboring node
-        if len(Gnp.graph[pos]): # neighbor exists, i.e., node not isolated
-            next_pos_ind = random.randint(0, len(Gnp.graph[pos])-1)
-            next_pos = Gnp.graph[pos][next_pos_ind]
-            Gnp.agents[next_pos].add(uuid)
+        if len(G.graph[pos]): # neighbor exists, i.e., node not isolated
+            next_pos_ind = random.randint(0, len(G.graph[pos])-1)
+            next_pos = G.graph[pos][next_pos_ind]
+            G.agents[next_pos].add(uuid)
         else: # stay on your sad island
             next_pos = pos
-            Gnp.agents[next_pos].add(uuid)
+            G.agents[next_pos].add(uuid)
         
         # update current agent's clock and insert it in heap
         next_clock = event_time + exp_rv(clock_rate)
         H.insert(uuid, next_clock, next_pos)
 
     # decomission data structures    
-    del Gnp
     del H
+    del G
 
     # print and plot
     if parameter_type == 'single':
@@ -101,6 +101,7 @@ def run_simulation(no_agents, graph_type, graph_size, edge_probability, mu, sigm
 
 
 if __name__ == "__main__":
+    print('\nPlease play with parameters on lines 105ff.\n')
     no_agents = 200
     mu = 0 # average value
     sigma = 10 # gaussian noise
