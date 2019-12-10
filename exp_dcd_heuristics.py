@@ -228,7 +228,7 @@ def run_simulation(agents, graph, dcd, simulation):
 
     # or return results
     elif simulation_type == 'sweep':
-        print('For {}, total number of nodes travelled by all agents is {}'.format(heuristic, step_count))
+        print('For {}, total number of edges travelled by all agents is {}'.format(heuristic, step_count))
         return (std_rt_val, std_rt_t, step_count_rt, agents_off_t, agents_off_val)
 
 if __name__ == "__main__":

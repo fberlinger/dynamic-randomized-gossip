@@ -100,7 +100,16 @@ def run_simulation(no_agents, init_val, clock_rate, graph_type, graph_size, edge
 
     # print and plot
     if not multi_sim:
-        fig = plt.figure(figsize=(10,15))
+        BIGGER_SIZE = 20
+        plt.rc('font', size=BIGGER_SIZE)          # controls default text sizes
+        plt.rc('axes', titlesize=BIGGER_SIZE)     # fontsize of the axes title
+        plt.rc('axes', labelsize=BIGGER_SIZE)    # fontsize of the x and y labels
+        plt.rc('xtick', labelsize=BIGGER_SIZE)    # fontsize of the tick labels
+        plt.rc('ytick', labelsize=BIGGER_SIZE)    # fontsize of the tick labels
+        plt.rc('legend', fontsize=BIGGER_SIZE)    # legend fontsize
+        plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
+        fig = plt.figure(figsize=(10,10))
+        
         for agent in range(no_agents):
             plt.plot(list(range(simulation_steps+1)), err_t[agent])
         plt.xlim((0, 1000))
@@ -136,7 +145,7 @@ if __name__ == "__main__":
         for n in range(no_agents):
             err_all[n] = list(map(add, err_all[n], err_t[n]))    
 
-    fig = plt.figure(figsize=(10,15))
+    fig = plt.figure(figsize=(10,10))
     for n in range(no_agents):
         err_all[n] = list(map(lambda x: x/no_sim, err_all[n])) 
         plt.plot(list(range(simulation_steps)), err_all[n])
@@ -155,7 +164,7 @@ if __name__ == "__main__":
         (err_t, var_t) = run_simulation(no_agents, init_val, clock_rate, graph_type, graph_size, edge_number, simulation_steps, multi_sim)
         var_all = list(map(add, var_all, var_t))    
 
-    fig = plt.figure(figsize=(10,15))
+    fig = plt.figure(figsize=(10,10))
     var_all = list(map(lambda x: x/no_sim*no_agents, var_all)) 
     plt.plot(list(range(simulation_steps)), var_all)
 

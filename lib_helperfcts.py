@@ -46,7 +46,7 @@ def analyze_single(val_0, val, mean_0, std_rt_val, std_rt_t, simulation_time, no
 
     # plot
     lim = math.ceil(max(max(val_0), abs(min(val_0)))) # histogram limits
-    fig, axs = plt.subplots(no_plots, 1, figsize=(10,15))
+    fig, axs = plt.subplots(no_plots, 1, figsize=(10,18))
     axs[0].plot(std_rt_t, std_rt_val)
     axs[0].set_xlabel('Simulation time [s]', fontsize='large', fontweight='bold')
     axs[0].set_ylabel('Standard deviation [-]', fontsize='large', fontweight='bold')
@@ -71,3 +71,17 @@ def analyze_single(val_0, val, mean_0, std_rt_val, std_rt_t, simulation_time, no
         axs[3].grid('k')
 
     plt.show()
+
+    '''
+    # value histogram for first figure in basic scalings
+    plt.figure(figsize=(10,6))
+    plt.hist(val_0, bins=21, range=[-lim, lim], label='initial')
+    plt.hist(val, bins=25, range=[-lim, lim], label='final')
+    plt.xlabel('Agent values', fontsize='large', fontweight='bold')
+    plt.ylabel('No of agents', fontsize='large', fontweight='bold')
+    plt.legend(loc="upper right")
+    plt.grid('k')
+    plt.savefig('./data/basic_scalings/value_histo.png')
+    plt.show()
+    plt.close()
+    '''
