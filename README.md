@@ -1,5 +1,5 @@
 # Dynamic-randomized-gossip
-We study average consensus in mobile multi-agent systems via randomized gossip
+We study average consensus in mobile multi-agent systems via randomized gossip. Complete report: **CS223_FinalProject_Berlinger_Graule.pdf**.
 
 ## How to use
 ### Requirements
